@@ -19,8 +19,16 @@ end
 
 # set up the chat completion
 
-anthropic_chat = RubyLLM.chat(model: "claude-3-7-sonnet-20250219").with_temperature(0.1)
-openai_chat = RubyLLM.chat(model: "gpt-4o-2024-05-13").with_temperature(0.1)
+models = [
+  "claude-3-7-sonnet-20250219",
+  "gpt-4o-2024-05-13",
+]
+
+padding = models.map(&:length).max
+
+chats = models.map do |model|
+  RubyLLM.chat(model: model).with_temperature(0.1)
+end
 
 system_prompt = <<~SYSTEM
   You are an expert user of the following command line Unix utilities:
@@ -38,20 +46,27 @@ system_prompt = <<~SYSTEM
   Otherwise, no yapping, no markdown, no fluff. Just the command.
 SYSTEM
 
-anthropic_chat.add_message role: :system, content: system_prompt
-openai_chat.add_message role: :system, content: system_prompt
+chats.each do |chat|
+  chat.add_message role: :system, content: system_prompt
+end
 
 # get the LLM response
 
 user_request = ARGV.join(" ")
 
-anthropic_response = anthropic_chat.ask user_request
-anthropic_command = anthropic_response.content
-puts "[anthropic] #{anthropic_command}"
+# anthropic_response = anthropic_chat.ask user_request
+# anthropic_command = anthropic_response.content
+# puts "[anthropic] #{anthropic_command}"
 
-openai_response = openai_chat.ask user_request
-openai_command = openai_response.content
-puts "[openai] #{openai_command}"
+# openai_response = openai_chat.ask user_request
+# openai_command = openai_response.content
+# puts "[openai] #{openai_command}"
+
+chats.each_with_index do |chat, i|
+  response = chat.ask user_request
+  command = response.content
+  puts "%d [%#{padding}s] %s" % [i, chat.model.id, command]
+end
 
 # maybe run the command
 
