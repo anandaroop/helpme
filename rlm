@@ -1,11 +1,22 @@
 #! /usr/bin/env ruby
 
-require 'dotenv/load'
+require 'dotenv'
 require 'ruby_llm'
+
+# find .env regardless of where this file is symlinked or run from
+
+actual_path_to_this_file = (File.realpath(__FILE__))
+this_dir = File.dirname(actual_path_to_this_file)
+env_path = File.join(this_dir, '.env')
+Dotenv.load(env_path)
+
+# configure API keys
 
 RubyLLM.configure do |config|
   config.anthropic_api_key = ENV['ANTHROPIC_API_KEY']
 end
+
+# set up the chat completion
 
 chat = RubyLLM.chat(model: "claude-3-7-sonnet-20250219").with_temperature(0.1)
 
@@ -25,11 +36,14 @@ chat.add_message role: :system, content: <<~SYSTEM
   Otherwise, no yapping, no markdown, no fluff. Just the command.
 SYSTEM
 
-user_request = ARGV.join(" ")
+# get the LLM response
 
+user_request = ARGV.join(" ")
 response = chat.ask user_request
 command = response.content
 puts command
+
+# maybe run the command
 
 print "Run this command? [y/N]: "
 if STDIN.gets =~ /^y/i
