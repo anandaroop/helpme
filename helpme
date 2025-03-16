@@ -48,7 +48,7 @@ system_prompt = <<~SYSTEM
 
   If you need more information from the user, state what's missing.
 
-  Otherwise, no yapping, no markdown, no fluff. Just the command.
+  Otherwise, no yapping, no markdown, no backticks, no fluff. Just the command.
 SYSTEM
 
 chats.each do |chat|
