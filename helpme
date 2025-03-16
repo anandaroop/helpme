@@ -2,6 +2,7 @@
 
 require 'dotenv'
 require 'ruby_llm'
+require 'rainbow'
 
 # find .env regardless of where this file is symlinked or run from
 
@@ -30,6 +31,8 @@ chats = models.map do |model|
   RubyLLM.chat(model: model).with_temperature(0.1)
 end
 
+explainer_chat = RubyLLM.chat(model: models[0]).with_temperature(0.1)
+
 system_prompt = <<~SYSTEM
   You are an expert user of the following command line Unix utilities:
   - ffmpeg
@@ -54,23 +57,34 @@ end
 
 user_request = ARGV.join(" ")
 
-# anthropic_response = anthropic_chat.ask user_request
-# anthropic_command = anthropic_response.content
-# puts "[anthropic] #{anthropic_command}"
-
-# openai_response = openai_chat.ask user_request
-# openai_command = openai_response.content
-# puts "[openai] #{openai_command}"
-
+commands = []
 chats.each_with_index do |chat, i|
   response = chat.ask user_request
-  command = response.content
-  puts "%d [%#{padding}s] %s" % [i, chat.model.id, command]
+  commands[i] = response.content
+  spaces = " " * (padding - chat.model.id.length)
+  puts "%s%s [%s] %s" % [spaces, Rainbow(chat.model.id).darkgray, Rainbow(i).bold.blue, Rainbow(commands[i]).green]
+end
+
+# get user response
+
+print "\nChoose command number (or Enter to quit): "
+user_response = STDIN.gets
+
+# maybe explain the command
+
+if user_response =~ /^e(\d+)/i
+  selected_index = $1.to_i
+  puts Rainbow("Getting explanation…").darkgray
+  response = explainer_chat.ask "Succintly explain the command: #{commands[selected_index]}"
+  puts Rainbow(response.content).blue
+  exit
 end
 
 # maybe run the command
 
-# print "Run this command? [y/N]: "
-# if STDIN.gets =~ /^y/i
-#   system anthropic_command
-# end
+if user_response =~ /^(\d+)/i
+  selected_index = $1.to_i
+  selected_command = commands[selected_index]
+  puts Rainbow("Running [#{selected_index}] #{selected_command}").darkgray
+  system selected_command
+end
