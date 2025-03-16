@@ -77,7 +77,7 @@ user_response = STDIN.gets
 if user_response =~ /^e(\d+)/i
   selected_index = $1.to_i
   puts Rainbow("Getting explanation…").darkgray
-  response = explainer_chat.ask "Succintly explain the command: #{commands[selected_index]}"
+  response = explainer_chat.ask "Succinctly explain the command: #{commands[selected_index]}"
   puts Rainbow(response.content).blue
   exit
 end
