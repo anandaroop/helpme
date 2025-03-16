@@ -7,7 +7,7 @@ RubyLLM.configure do |config|
   config.anthropic_api_key = ENV['ANTHROPIC_API_KEY']
 end
 
-chat = RubyLLM.chat(model: "claude-3-7-sonnet-20250219")
+chat = RubyLLM.chat(model: "claude-3-7-sonnet-20250219").with_temperature(0.1)
 
 chat.add_message role: :system, content: <<~SYSTEM
   You are an expert user of the following command line Unix utilities:
@@ -18,11 +18,20 @@ chat.add_message role: :system, content: <<~SYSTEM
   command line invocation that will accomplish the user's goal,
   including all necessary flags and arguments.
 
+  Prefer ImageMagick over ffmpeg for image processing tasks.
+
   If you need more information from the user, state what's missing.
 
   Otherwise, no yapping, no markdown, no fluff. Just the command.
 SYSTEM
 
-response = chat.ask "Convert test.png to a gif no larger than 1000 pixrls, ensure sRGB"
-puts response.content
+user_request = ARGV.join(" ")
 
+response = chat.ask user_request
+command = response.content
+puts command
+
+print "Run this command? [y/N]: "
+if STDIN.gets =~ /^y/i
+  system command
+end
