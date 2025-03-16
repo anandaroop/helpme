@@ -14,13 +14,15 @@ Dotenv.load(env_path)
 
 RubyLLM.configure do |config|
   config.anthropic_api_key = ENV['ANTHROPIC_API_KEY']
+  config.openai_api_key = ENV['OPENAI_API_KEY']
 end
 
 # set up the chat completion
 
-chat = RubyLLM.chat(model: "claude-3-7-sonnet-20250219").with_temperature(0.1)
+anthropic_chat = RubyLLM.chat(model: "claude-3-7-sonnet-20250219").with_temperature(0.1)
+openai_chat = RubyLLM.chat(model: "gpt-4o-2024-05-13").with_temperature(0.1)
 
-chat.add_message role: :system, content: <<~SYSTEM
+system_prompt = <<~SYSTEM
   You are an expert user of the following command line Unix utilities:
   - ffmpeg
   - imagemagick
@@ -36,16 +38,24 @@ chat.add_message role: :system, content: <<~SYSTEM
   Otherwise, no yapping, no markdown, no fluff. Just the command.
 SYSTEM
 
+anthropic_chat.add_message role: :system, content: system_prompt
+openai_chat.add_message role: :system, content: system_prompt
+
 # get the LLM response
 
 user_request = ARGV.join(" ")
-response = chat.ask user_request
-command = response.content
-puts command
+
+anthropic_response = anthropic_chat.ask user_request
+anthropic_command = anthropic_response.content
+puts "[anthropic] #{anthropic_command}"
+
+openai_response = openai_chat.ask user_request
+openai_command = openai_response.content
+puts "[openai] #{openai_command}"
 
 # maybe run the command
 
-print "Run this command? [y/N]: "
-if STDIN.gets =~ /^y/i
-  system command
-end
+# print "Run this command? [y/N]: "
+# if STDIN.gets =~ /^y/i
+#   system anthropic_command
+# end
