@@ -20,4 +20,14 @@ RubyLLM.configure do |config|
   # config.max_retries = 3        # Number of retries on failures
 end
 
-pp RubyLLM.models.all
+# Check available models
+puts "Available models:"
+RubyLLM.models.chat_models.each do |model|
+  puts "- #{model.id} (#{model.provider})"
+end
+
+# Try a simple query
+chat = RubyLLM.chat
+response = chat.ask "Hello, world!"
+puts response.content
+
