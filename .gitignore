@@ -1,1 +1,17 @@
 .env
+*.gif
+*.jpg
+*.jpeg
+*.png
+*.svg
+*.webp
+*.mp4
+*.mov
+*.mov
+*.avi
+*.mp3
+*.wav
+*.ogg
+*.flac
+*.aac
+
