@@ -22,9 +22,9 @@ end
 # set up the chat completion
 
 models = [
-  "claude-3-7-sonnet-20250219",
-  "gpt-4o-mini",
-  "gemini-2.0-flash"
+  "claude-sonnet-4-20250514",
+  "gpt-4.1-2025-04-14",
+  "gemini-2.5-flash-preview-05-20"
 ]
 
 padding = models.map(&:length).max
@@ -36,19 +36,21 @@ end
 explainer_chat = RubyLLM.chat(model: models[0]).with_temperature(0.1)
 
 system_prompt = <<~SYSTEM
-  You are an expert user of the following command line Unix utilities:
-  - ffmpeg
-  - imagemagick
+  You are an expert user of the Unix command line.
 
   Your task is to take the user's request and produce the exact
   command line invocation that will accomplish the user's goal,
   including all necessary flags and arguments.
 
-  Prefer ImageMagick over ffmpeg for image processing tasks.
+  For image related tasks, prefer using ImageMagick.
+
+  For video related tasks, prefer using ffmpeg.
 
   If you need more information from the user, state what's missing.
 
-  Otherwise, no yapping, no markdown, no backticks, no fluff. Just the command.
+  NO YAPPING, no markdown, no codefence, no backticks, no fluff.
+
+  Just the command.
 SYSTEM
 
 chats.each do |chat|
