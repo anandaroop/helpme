@@ -13,7 +13,7 @@ module Helpme
     extend Dry::CLI::Registry
 
     register "list", Commands::ListCommand
-    register "cost", Commands::CostCommand
-    register "query", Commands::QueryCommand, aliases: ["q"]
+    register "cost", Commands::CostCommand, aliases: ["price"]
+    register "query", Commands::QueryCommand
   end
 end

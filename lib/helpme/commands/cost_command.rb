@@ -6,7 +6,7 @@ module Helpme
       argument :model, type: :string, required: true, desc: "Model name"
 
       def call(model:, **)
-        puts "Token costs TKTK"
+        puts JSON.pretty_generate(RubyLLM.models.find(model).pricing.to_h)
       end
     end
   end
