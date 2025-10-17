@@ -2,4 +2,10 @@
 
 require_relative "../lib/helpme"
 
+# If first argument is not a known subcommand, prepend "query"
+known_commands = ["list", "cost", "price", "query", "help", "-h", "--help"]
+if !ARGV.empty? && (!known_commands.include?(ARGV[0]) && !ARGV[0].start_with?("-"))
+  ARGV.unshift("query")
+end
+
 Dry::CLI.new(Helpme::CLI).call
