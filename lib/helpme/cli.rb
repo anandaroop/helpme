@@ -17,7 +17,7 @@ module Helpme
         elsif cost
           puts "--cost not yet implemented"
         elsif query
-          puts "Not yet implemented"
+          Commands::QueryCommand.new(query: query, model: model).call
         else
           print_usage
         end

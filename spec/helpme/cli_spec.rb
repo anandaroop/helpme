@@ -27,8 +27,8 @@ RSpec.describe Helpme::CLI::RootCommand do
     end
 
     context "when called with a query" do
-      it "shows not yet implemented message" do
-        expect { command.call(query: "some query") }.to output("Not yet implemented\n").to_stdout
+      it "shows hello message with query" do
+        expect { command.call(query: "some query") }.to output("Hello! You asked: some query\n").to_stdout
       end
     end
   end
