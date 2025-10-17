@@ -32,4 +32,6 @@ Always follow these
 
 - Lint and test: `bundle exec rake`
 - Lint: `bundle exec rake lint`
+- Lint and fix: `bundle exec rake lint:fix`
 - Test: `bundle exec rake test`
+- Test verbose: `bundle exec rake test:doc`
