@@ -1,6 +1,10 @@
 {
   "permissions": {
-    "allow": ["Bash(bundle exec rake:*)"],
+    "allow": [
+      "Bash(bundle exec rake:*)",
+      "Bash(bundle exec rspec:*)",
+      "Bash(bundle exec standardrb:*)"
+    ],
     "deny": [],
     "ask": []
   }
