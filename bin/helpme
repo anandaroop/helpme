@@ -2,4 +2,4 @@
 
 require_relative "../lib/helpme"
 
-Dry::CLI.new(Helpme::CLI::RootCommand).call
+Dry::CLI.new(Helpme::CLI).call

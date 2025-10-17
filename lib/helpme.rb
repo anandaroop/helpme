@@ -5,4 +5,6 @@ module Helpme
 end
 
 require_relative "helpme/commands/query_command"
+require_relative "helpme/commands/list_command"
+require_relative "helpme/commands/cost_command"
 require_relative "helpme/cli"
