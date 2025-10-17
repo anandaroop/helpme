@@ -1,4 +1,5 @@
 require "dry/cli"
+require "dotenv/load"
 
 module Helpme
   VERSION = "0.1.0"

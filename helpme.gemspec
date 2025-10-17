@@ -17,4 +17,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency "tty-spinner", "~> 0.9"
   spec.add_dependency "rainbow", "~> 3.1"
   spec.add_dependency "ruby_llm", "~> 1.8"
+  spec.add_dependency "dotenv", "~> 3.0"
 end
