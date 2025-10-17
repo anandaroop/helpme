@@ -8,6 +8,12 @@
 - **Linting**: StandardRB
 - **Testing**: Rspec
 - **Task runner**: Rake
+- **LLM**: RubyLLM (see https://rubyllm.com)
+
+## User interface guidelines
+
+- Use **rainbow** gem judiciously for colored output
+- Use **tty-spinner** gem for terminal feedback
 
 ## Conventions
 
