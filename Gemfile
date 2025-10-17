@@ -1,7 +1,9 @@
-# frozen_string_literal: true
-
 source "https://rubygems.org"
 
-gem "ruby_llm"
-gem "dotenv"
-gem "rainbow"
+gemspec
+
+group :development do
+  gem "rake"
+  gem "rspec"
+  gem "standard"
+end
