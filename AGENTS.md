@@ -19,7 +19,12 @@
 
 Always follow these
 
-- Use TDD
+- When asked to implement a feature from scratch-
+  - make sure you have enough info to build it
+  - use test-driven development (TDD) to drive out the feature
+  - use mocks to
+    - make tests resilient to configuration changes
+    - avoid network access
 - Lint and test before committing
 - Use conventional-commits format
 
