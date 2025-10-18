@@ -49,8 +49,22 @@ bundle install
 bundle exec rake install
 ```
 
+## API Keys
+
+You will need API keys in your ENV for all the model providers `helpme` uses.
+
+See [.env.example](.env.example) for the default ENV var names.
+
+(`helpme` will also [fall back to more generically named API keys](lib/helpme/cli.rb) if they are in your ENV already.)
+
 ## Modifying
 
-Update the system prompt to tailor `helpme` to your setup.
+`helpme` can be customized as follows:
 
-For example I nudge it to use `imagemagick` for images, `ffmpeg` for videos; `gifski` for animated gifs, etc.
+- Update the system prompt in [lib/helpme/response.rb](lib/helpme/response.rb) to tailor `helpme` to your setup.
+
+  - For example I nudge it to use `imagemagick` for images, `ffmpeg` for videos; `http` instead of `curl`, etc.
+
+- Update the list of models in [lib/helpme/models.rb](lib/helpme/models.rb) to determine which models will be used by default.
+
+- Update the list of providers in [lib/helpme/commands/list_command.rb](lib/helpme/commands/list_command.rb) to determine which additional models can be listed or costed. (If you add providers, you'll likely need to account for API key configuration too in [lib/helpme/cli.rb](lib/helpme/cli.rb))
