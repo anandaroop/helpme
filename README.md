@@ -1,8 +1,11 @@
 # helpme
 
-A CLI for CLIs.
+A CLI for CLIs
 
-Use natural language to get help with commands and shell utilities.
+Use natural language to get help with commands and shell utilities from multiple LLMs at once:
+
+![examples-heic](https://github.com/user-attachments/assets/6017455b-ab8a-409a-90cb-277acc0c7854)
+
 
 ## Examples
 
