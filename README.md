@@ -4,7 +4,11 @@ A CLI for CLIs
 
 Use natural language to get help with commands and shell utilities from multiple LLMs at once:
 
+<!--
 ![examples-heic](https://github.com/user-attachments/assets/6017455b-ab8a-409a-90cb-277acc0c7854)
+-->
+
+![examples-heic4s](https://github.com/user-attachments/assets/04060f25-2c5b-4c7c-a3cf-1f31f964c6da)
 
 
 ## Examples
