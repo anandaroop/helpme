@@ -12,6 +12,8 @@ helpme "get out of the git detached head state"
 helpme "convert screencap.mov to 5fps gif, one-quarter size"
 
 helpme "prettify xml file sitemap-partners.xml"
+
+helpme "extract geolocation info from IMG_9967.HEIC without exiftool"
 ```
 
 ## Usage
