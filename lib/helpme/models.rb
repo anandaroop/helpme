@@ -6,7 +6,7 @@ module Helpme
         "claude-sonnet-4-20250514",
         "claude-sonnet-4-5-20250929",
         "gpt-4.1-2025-04-14",
-        "gemini-2.5-flash-preview-05-20"
+        "gemini-2.5-flash"
       ]
     end
   end
