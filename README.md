@@ -10,7 +10,6 @@ Use natural language to get help with commands and shell utilities from multiple
 
 ![examples-heic4s](https://github.com/user-attachments/assets/04060f25-2c5b-4c7c-a3cf-1f31f964c6da)
 
-
 ## Examples
 
 ```sh
@@ -71,9 +70,28 @@ See [.env.example](.env.example) for the default ENV var names.
 `helpme` can be customized as follows:
 
 - Update the system prompt in [lib/helpme/response.rb](lib/helpme/response.rb) to tailor `helpme` to your setup.
-
   - For example I nudge it to use `imagemagick` for images, `ffmpeg` for videos; `http` instead of `curl`, etc.
 
-- Update the list of models in [lib/helpme/models.rb](lib/helpme/models.rb) to determine which models will be used by default.
+- Update the list of models in [lib/helpme/models.rb](lib/helpme/models.rb) to determine which models will be used by default. (See below for refreshing model list)
 
 - Update the list of providers in [lib/helpme/commands/list_command.rb](lib/helpme/commands/list_command.rb) to determine which additional models can be listed or costed. (If you add providers, you'll likely need to account for API key configuration too in [lib/helpme/cli.rb](lib/helpme/cli.rb))
+
+## Refreshing model list
+
+See: https://rubyllm.com/models/#refreshing-the-registry
+
+```rb
+> bundle console
+
+# update model list in memory
+RubyLLM.models.refresh!
+
+# persist updated list
+RubyLLM.models.save_to_json
+
+# view model ids
+RubyLLM::models.map(&:id)
+
+# filter ids by family
+RubyLLM::models.map(&:id).select{ |id| id =~ /sonnet/i}
+```

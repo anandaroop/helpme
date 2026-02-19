@@ -2,11 +2,10 @@ module Helpme
   class Models
     def self.current
       [
-        "claude-haiku-4-5-20251001",
-        "claude-sonnet-4-20250514",
-        "claude-sonnet-4-5-20250929",
-        "gpt-4.1-2025-04-14",
-        "gemini-2.5-flash"
+        "claude-sonnet-4-6",
+        "gpt-5.2",
+        # "gemini-2.5-flash"
+        "gemini-3-flash-preview"
       ]
     end
   end
