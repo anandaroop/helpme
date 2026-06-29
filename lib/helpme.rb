@@ -2,7 +2,7 @@ require "dry/cli"
 require "dotenv/load"
 
 module Helpme
-  VERSION = "0.1.0"
+  VERSION = "0.2.0"
 end
 
 require_relative "helpme/commands/query_command"
