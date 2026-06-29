@@ -80,6 +80,11 @@ See [.env.example](.env.example) for the default ENV var names.
 
 See: https://rubyllm.com/models/#refreshing-the-registry
 
+```sh
+# open a console with dependencies loaded
+./bin/console
+```
+
 ```rb
 # update model list in memory
 RubyLLM.models.refresh!
