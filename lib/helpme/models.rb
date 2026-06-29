@@ -3,9 +3,8 @@ module Helpme
     def self.current
       [
         "claude-sonnet-4-6",
-        "gpt-5.2",
-        # "gemini-2.5-flash"
-        "gemini-3-flash-preview"
+        "gpt-5.5",
+        "gemini-3.5-flash"
       ]
     end
   end
